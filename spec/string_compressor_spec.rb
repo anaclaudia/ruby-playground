@@ -32,17 +32,32 @@ describe StringCompressor do
   end
 
   context "given a string" do
+    subject do
+      StringCompressor.new("abcd")
+    end
+
     it "doesn't return the count for characters that don't repeat" do
-      expect(StringCompressor.new("abcd").compress).to eql("abcd")
+      expect(subject.compress).to eql("abcd")
+    end
+  end
+
+  context "given a longest string" do
+    subject do
+      StringCompressor.new("aabbbccc")
     end
 
     it "returns each character followed by their count" do
-      expect(StringCompressor.new("aabbbccc").compress).to eql("a2b3c3")
+      expect(subject.compress).to eql("a2b3c3")
     end
   end
 
   context "given a non string value" do
-    it "returns an CompressorError message" do
+    subject do
+      StringCompressor.new(1)
+    end
+
+    it "raises an 'NonString' exception" do
+      expect { raise subject.compress }.to raise_error("Non string received, please inform a string")
     end
   end
 end
