@@ -53,8 +53,8 @@ class StringCompressor
     end
   end
 
-
   private
+
   def split_value
     @value.split("")
   end
